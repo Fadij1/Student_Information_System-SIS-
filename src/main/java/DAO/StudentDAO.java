@@ -1,6 +1,7 @@
 package DAO;
 
 
+import Model.Register;
 import Model.Student;
 
 import java.sql.Connection;
