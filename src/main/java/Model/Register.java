@@ -1,11 +1,11 @@
 package Model;
 
 public class Register {
-    String firstName;
-    String lastName;
-    String username;
-    String password;
-    String email;
+   private String firstName;
+   private String lastName;
+   private String username;
+   private String password;
+   private String email;
 
     public Register() {
     }

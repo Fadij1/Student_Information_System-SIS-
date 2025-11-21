@@ -1,7 +1,7 @@
 package UI;
 
 import DAO.StudentDAO;
-import Model.Register; // Use your validation logic
+import Model.Register;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -15,13 +15,13 @@ import javafx.stage.Stage;
 public class SignupScreen {
 
     public void show(Stage stage) {
-        // 1. Main Layout
+        //  Main Layout
         VBox layout = new VBox(15);
         layout.setAlignment(Pos.CENTER);
         layout.setPadding(new Insets(40));
         layout.setStyle("-fx-background-color: #f4f6f9;"); // Light Grey Background
 
-        // 2. Title
+        //  Title
         Label title = new Label("Create Student Account");
         title.setFont(Font.font("Segoe UI", FontWeight.BOLD, 26));
         title.setTextFill(Color.web("#2c3e50"));
@@ -30,7 +30,7 @@ public class SignupScreen {
         subtitle.setFont(Font.font("Segoe UI", 14));
         subtitle.setTextFill(Color.web("#7f8c8d"));
 
-        // 3. Input Fields
+        //  Input Fields
         TextField fNameField = createStyledField("First Name");
         TextField lNameField = createStyledField("Last Name");
         TextField emailField = createStyledField("Email Address");
@@ -41,7 +41,7 @@ public class SignupScreen {
         passHint.setFont(Font.font("Segoe UI", 11));
         passHint.setTextFill(Color.GREY);
 
-        // 4. Buttons
+        //  Buttons
         Button signupBtn = new Button("Create Account");
         signupBtn.setPrefWidth(300);
         signupBtn.setPrefHeight(45);
@@ -54,14 +54,14 @@ public class SignupScreen {
         Label messageLabel = new Label(); // To show errors/success
         messageLabel.setFont(Font.font("Segoe UI", 13));
 
-        // 5. Logic
+        //  Logic
         signupBtn.setOnAction(e -> {
             String fName = fNameField.getText().trim();
             String lName = lNameField.getText().trim();
             String email = emailField.getText().trim();
             String pass = passField.getText();
 
-            // --- VALIDATION (Using your Utility.Register class) ---
+            // VALIDATION (Using your Utility.Register class)
             if (!Register.isValidFirstName(fName)) {
                 showError(messageLabel, "Invalid First Name (Must start with Capital letter).");
                 return;
@@ -79,7 +79,7 @@ public class SignupScreen {
                 return;
             }
 
-            // --- DATABASE CALL ---
+            //DATABASE CALL
             StudentDAO dao = new StudentDAO();
             boolean success = dao.signup(fName, lName, email, pass);
 
@@ -99,7 +99,7 @@ public class SignupScreen {
             new LoginScreen().show(stage);
         });
 
-        // 6. Add to Layout
+        // Add to Layout
         layout.getChildren().addAll(
                 title, subtitle,
                 new Label(""), // Spacer
@@ -109,7 +109,7 @@ public class SignupScreen {
                 signupBtn, backBtn
         );
 
-        // 7. Scene
+        // Scene
         Scene scene = new Scene(layout, 1000, 650); // Same size as login
         stage.setTitle("FIS Signup");
         stage.setScene(scene);

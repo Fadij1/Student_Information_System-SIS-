@@ -1,8 +1,6 @@
 package UI;
 
-//import DAO.AdminDAO;
 import DAO.StudentDAO;
-import DAO.TeacherDAO;
 import Model.Student;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
