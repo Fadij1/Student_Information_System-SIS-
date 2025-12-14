@@ -29,7 +29,6 @@ public class AdminDAO {
         } catch (SQLException e) { e.printStackTrace(); }
         return null;
     }
-
     // =========================
     // TEACHER MANAGEMENT
     // =========================
@@ -119,6 +118,7 @@ public class AdminDAO {
             return false;
         }
     }
+
 
     // Delete Hall
     public boolean deleteHall(int hallId) {

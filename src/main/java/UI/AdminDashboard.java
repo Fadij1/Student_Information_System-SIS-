@@ -18,7 +18,6 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
-
 import java.io.InputStream;
 
 public class AdminDashboard {
@@ -54,6 +53,7 @@ public class AdminDashboard {
         topBar.getChildren().addAll(logo, brandLabel);
         return topBar;
     }
+
 
     // =========================================
     // 2. Sidebar
