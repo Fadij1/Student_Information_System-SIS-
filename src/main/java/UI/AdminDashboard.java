@@ -137,10 +137,10 @@ public class AdminDashboard {
         return sidebar;
     }
 
-
     // =========================================
     // VIEW A: Manage Teachers
     // =========================================
+    
     private VBox createTeachersView(BorderPane root) {
         VBox content = new VBox(15);
         content.setPadding(new Insets(20));
