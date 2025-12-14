@@ -5,9 +5,9 @@ public class Teacher {
     private String firstName;
     private String lastName;
     private String email;
-    private String password;
-    private String department;
-    private String profilePicPath;
+    private String password ;
+    private String department ;
+    private String profilePicPath ;
 
 
     public Teacher(int teacherId, String firstName, String lastName, String email,String password, String department, String profilePicPath) {
