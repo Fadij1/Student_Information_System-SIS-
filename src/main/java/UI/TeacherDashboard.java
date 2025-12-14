@@ -16,10 +16,10 @@ import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
+
 import java.io.InputStream;
 import java.util.List;
 import java.util.Optional;
-
 
 public class TeacherDashboard {
 
@@ -55,17 +55,15 @@ public class TeacherDashboard {
         return topBar;
     }
 
-
-    // Sidebar (Updated with Profile Logic)
+    // 2. Sidebar (Updated with Profile Logic)
     private VBox createSidebar(Teacher teacher, BorderPane root) {
         VBox sidebar = new VBox(15);
         sidebar.setPrefWidth(250);
         sidebar.setStyle("-fx-background-color: #34495e;");
         sidebar.setPadding(new Insets(30, 10, 20, 10));
-
         sidebar.setAlignment(Pos.TOP_CENTER);
 
-        // Profile Pic Logic
+        // A. Profile Pic Logic
         ImageView profilePic = new ImageView();
         profilePic.setFitWidth(80); profilePic.setFitHeight(80);
         try {
@@ -80,7 +78,7 @@ public class TeacherDashboard {
         Circle clip = new Circle(40, 40, 40);
         profilePic.setClip(clip);
 
-        // Name
+        // B. Name
         Label nameLabel = new Label("Prof. " + teacher.getLastName());
         nameLabel.setTextFill(Color.WHITE);
         nameLabel.setFont(Font.font("Segoe UI", FontWeight.BOLD, 16));
@@ -88,7 +86,7 @@ public class TeacherDashboard {
         Label deptLabel = new Label(teacher.getPassword());
         deptLabel.setTextFill(Color.LIGHTGRAY);
 
-        // Menu Buttons
+        // C. Menu Buttons
         VBox navMenu = new VBox(5);
         Button dashBtn = createNavButton("My Courses", true);
         Button scheduleBtn = createNavButton("My Schedule", false);
@@ -116,7 +114,6 @@ public class TeacherDashboard {
             root.setCenter(new LMSTeacherView().createView(teacher));
             setActive(lmsBtn, dashBtn, scheduleBtn, profileBtn, logoutBtn);
         });
-
 
         profileBtn.setOnAction(e -> {
             root.setCenter(createProfileView(teacher, root)); // NEW View
@@ -434,8 +431,9 @@ public class TeacherDashboard {
         return content;
     }
 
-
-
+    // =========================================
+    // 6. NEW: Profile View
+    // =========================================
     private VBox createProfileView(Teacher teacher, BorderPane root) {
         VBox content = new VBox(15); // Consistent spacing
         content.setPadding(new Insets(40));
@@ -446,8 +444,7 @@ public class TeacherDashboard {
         title.setFont(Font.font("Segoe UI", FontWeight.LIGHT, 28));
         title.setTextFill(Color.web("#2c3e50"));
 
-
-        // Profile Picture Section
+        // --- 1. Profile Picture Section ---
         HBox picSection = new HBox(20);
         picSection.setAlignment(Pos.CENTER_LEFT);
 
@@ -481,7 +478,7 @@ public class TeacherDashboard {
         });
         picSection.getChildren().addAll(currentPic, uploadBtn);
 
-        // Form Fields
+        // --- 2. Form Fields ---
 
         // First Name
         Label lblF = new Label("First Name:");
@@ -509,7 +506,7 @@ public class TeacherDashboard {
         passField.setText(teacher.getDepartment()); // Pre-fill
         passField.setMaxWidth(400);
 
-        // Save Button
+        // --- 3. Save Button ---
         Button saveBtn = new Button("Save Changes");
         saveBtn.setStyle("-fx-background-color: #27ae60; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand;");
         saveBtn.setPrefWidth(150);
