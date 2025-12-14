@@ -55,7 +55,7 @@ public class TeacherDashboard {
         return topBar;
     }
 
-    // 2. Sidebar (Updated with Profile Logic)
+    // Sidebar (Updated with Profile Logic)
     private VBox createSidebar(Teacher teacher, BorderPane root) {
         VBox sidebar = new VBox(15);
         sidebar.setPrefWidth(250);
@@ -63,7 +63,8 @@ public class TeacherDashboard {
         sidebar.setPadding(new Insets(30, 10, 20, 10));
         sidebar.setAlignment(Pos.TOP_CENTER);
 
-        // A. Profile Pic Logic
+
+        // Profile Pic Logic
         ImageView profilePic = new ImageView();
         profilePic.setFitWidth(80); profilePic.setFitHeight(80);
         try {
@@ -78,7 +79,7 @@ public class TeacherDashboard {
         Circle clip = new Circle(40, 40, 40);
         profilePic.setClip(clip);
 
-        // B. Name
+        // Name
         Label nameLabel = new Label("Prof. " + teacher.getLastName());
         nameLabel.setTextFill(Color.WHITE);
         nameLabel.setFont(Font.font("Segoe UI", FontWeight.BOLD, 16));
@@ -86,7 +87,7 @@ public class TeacherDashboard {
         Label deptLabel = new Label(teacher.getPassword());
         deptLabel.setTextFill(Color.LIGHTGRAY);
 
-        // C. Menu Buttons
+        // Menu Buttons
         VBox navMenu = new VBox(5);
         Button dashBtn = createNavButton("My Courses", true);
         Button scheduleBtn = createNavButton("My Schedule", false);
@@ -115,6 +116,7 @@ public class TeacherDashboard {
             setActive(lmsBtn, dashBtn, scheduleBtn, profileBtn, logoutBtn);
         });
 
+
         profileBtn.setOnAction(e -> {
             root.setCenter(createProfileView(teacher, root)); // NEW View
             setActive(profileBtn, dashBtn, logoutBtn);
@@ -141,7 +143,7 @@ public class TeacherDashboard {
         parentList.getItems().addAll(dao.getParentsContactingTeacher(teacher.getTeacherId()));
         parentList.setPrefWidth(250);
 
-        // --- NEW CODE START: Format the list items ---
+        // NEW CODE START: Format the list items
         parentList.setCellFactory(param -> new ListCell<Parent>() {
             @Override
             protected void updateItem(Parent item, boolean empty) {
@@ -431,9 +433,7 @@ public class TeacherDashboard {
         return content;
     }
 
-    // =========================================
-    // 6. NEW: Profile View
-    // =========================================
+
     private VBox createProfileView(Teacher teacher, BorderPane root) {
         VBox content = new VBox(15); // Consistent spacing
         content.setPadding(new Insets(40));
@@ -444,7 +444,7 @@ public class TeacherDashboard {
         title.setFont(Font.font("Segoe UI", FontWeight.LIGHT, 28));
         title.setTextFill(Color.web("#2c3e50"));
 
-        // --- 1. Profile Picture Section ---
+        // Profile Picture Section
         HBox picSection = new HBox(20);
         picSection.setAlignment(Pos.CENTER_LEFT);
 
@@ -478,7 +478,7 @@ public class TeacherDashboard {
         });
         picSection.getChildren().addAll(currentPic, uploadBtn);
 
-        // --- 2. Form Fields ---
+        // Form Fields
 
         // First Name
         Label lblF = new Label("First Name:");
@@ -506,7 +506,7 @@ public class TeacherDashboard {
         passField.setText(teacher.getDepartment()); // Pre-fill
         passField.setMaxWidth(400);
 
-        // --- 3. Save Button ---
+        // Save Button
         Button saveBtn = new Button("Save Changes");
         saveBtn.setStyle("-fx-background-color: #27ae60; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand;");
         saveBtn.setPrefWidth(150);

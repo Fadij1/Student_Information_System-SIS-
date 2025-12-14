@@ -70,7 +70,7 @@ public class TeacherDAO {
 
     }
 
-    // 3. update profile picture
+    // update profile picture
     public boolean updateProfilePic(int studentId, String imagePath) {
         String sql = "UPDATE Students SET ProfilePicPath = ? WHERE StudentID = ?";
 
@@ -92,9 +92,9 @@ public class TeacherDAO {
     }
 
 
-    //3. update profile info
+    // update profile info
     public boolean updateProfile(int teacherId, String fName, String lName, String email, String password, String dept, String picPath) {
-        String sql =  "UPDATE Teachers SET FirstName=?, LastName=?, Email=?, "  +
+        String sql =   "UPDATE Teachers SET FirstName=?, LastName=?, Email=?, "  +
                  "Password=CONVERT(NVARCHAR(64), HASHBYTES('SHA2_256', ?), 2), Department=?, ProfilePicPath=? WHERE TeacherID=?";
         try (Connection conn = DatabaseManager.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
