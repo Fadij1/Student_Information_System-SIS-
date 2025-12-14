@@ -1,6 +1,8 @@
 package DAO;
 
 
+import Model.Course;
+import Model.EnrolledCourse;
 import Model.Register;
 import Model.Student;
 
