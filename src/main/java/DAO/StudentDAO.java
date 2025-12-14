@@ -311,22 +311,22 @@ public class StudentDAO {
     public double getTotalPaid(int studentId) {
         String sql = "SELECT SUM(Amount) AS TotalPaid FROM Payments WHERE StudentID = ?";
         try (Connection conn = DatabaseManager.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+             PreparedStatement pstmt = conn.prepareStatement(sql))  {
 
             pstmt.setInt(1, studentId);
             try (ResultSet rs = pstmt.executeQuery()) {
                 if (rs.next()) {
-                    return rs.getDouble("TotalPaid"); // Returns 0.0 if null
+                    return rs.getDouble("TotalPaid");  // Returns 0.0 if null
                 }
             }
-        } catch (SQLException e) { e.printStackTrace(); }
+        } catch (SQLException e) {  e.printStackTrace();  }
         return 0.0;
     }
 
     // 2. Make a Payment
     public boolean payTuition(int studentId, double amount) {
         // STEP 1: Check if Wallet has enough money first!
-        double currentWalletBalance = getWalletBalance(studentId); // Helper method below
+        double currentWalletBalance = getWalletBalance(studentId);  // Helper method below
 
         if (currentWalletBalance < amount) {
             System.out.println("Transaction Failed: Insufficient funds in Wallet.");
@@ -341,8 +341,8 @@ public class StudentDAO {
         try (Connection conn = DatabaseManager.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
-            pstmt.setDouble(1, amount); // Decrease Wallet
-            pstmt.setDouble(2, amount); // Decrease Debt
+            pstmt.setDouble(1, amount);  // Decrease Wallet
+            pstmt.setDouble(2, amount);  // Decrease Debt
             pstmt.setInt(3, studentId);
 
             int rows = pstmt.executeUpdate();
@@ -355,23 +355,25 @@ public class StudentDAO {
 
     // Helper to check balance before paying
     public double getWalletBalance(int studentId) {
-        String sql = "SELECT Wallet FROM Students WHERE StudentID = ?";
+        String sql =  "SELECT Wallet FROM Students WHERE StudentID = ?";
         try (Connection conn = DatabaseManager.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setInt(1, studentId);
             ResultSet rs = pstmt.executeQuery();
             if (rs.next()) return rs.getDouble("Wallet");
-        } catch (SQLException e) { e.printStackTrace(); }
+        } catch (SQLException e)  { e.printStackTrace(); }
         return 0.0;
     }
 
-    // Add money to the Wallet (e.g., via Bank Transfer / Credit Card)
+
+     // Add money to the Wallet (e.g., via Bank Transfer / Credit Card)
     public boolean depositMoney(int studentId, double amount) {
+
         // Only Wallet increases. Debt stays the same until you choose to "Pay" it.
         String sql = "UPDATE Students SET Wallet = Wallet + ? WHERE StudentID = ?";
 
         try (Connection conn = DatabaseManager.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+             PreparedStatement pstmt = conn.prepareStatement(sql))  {
 
             pstmt.setDouble(1, amount);
             pstmt.setInt(2, studentId);

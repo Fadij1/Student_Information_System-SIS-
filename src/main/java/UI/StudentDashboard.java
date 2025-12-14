@@ -285,12 +285,14 @@ public class StudentDashboard {
         card.setPadding(new Insets(20));
         card.setStyle("-fx-background-color: " + hexColor + "; -fx-background-radius: 5;");
 
+
         // Shadow effect
         DropShadow shadow = new DropShadow();
         shadow.setColor(Color.rgb(0, 0, 0, 0.2));
         shadow.setRadius(5);
         shadow.setOffsetY(2);
         card.setEffect(shadow);
+
 
         // Top Row: Main Value + Badge
         HBox topRow = new HBox();
@@ -317,6 +319,7 @@ public class StudentDashboard {
         Label titleLabel = new Label(title);
         titleLabel.setTextFill(Color.rgb(255, 255, 255, 0.9));
         titleLabel.setFont(Font.font("Segoe UI", FontWeight.BOLD, 12));
+
 
         // Progress Bar (Decorative)
         ProgressBar pb = new ProgressBar(0.7);
@@ -819,7 +822,6 @@ public class StudentDashboard {
         VBox content = new VBox(20);
         content.setPadding(new Insets(30));
         content.setAlignment(Pos.TOP_LEFT);
-
         // 1. Header
         Button backBtn = new Button("← Back");
         backBtn.setStyle(
@@ -837,18 +839,16 @@ public class StudentDashboard {
 
         StudentDAO dao = new StudentDAO();
         Student updatedStudent1=dao.login(student.getEmail(), student.getPassword());
-
         // 2. GET DATA SEPARATELY
         // Wallet = Money you HAVE.
         // AmountToBePaid = Money you OWE.
         double currentWallet = updatedStudent1.getWallet();
         double currentDebt = updatedStudent1.getAmountToBePaid();
-
         // 3. Financial Cards Row
         HBox financeRow = new HBox(20);
         financeRow.setAlignment(Pos.CENTER_LEFT);
 
-        // --- BOX 1: WALLET (Available Funds) ---
+        //  BOX 1: WALLET (Available Funds)
         // Green if you have money, Grey if empty
         String walletColor = currentWallet > 0 ? "#2ecc71" : "#95a5a6";
         Pane walletCard = createStatCard("WALLET (AVAILABLE)", String.format("%,.0f EGP", currentWallet), "Pre-Paid", walletColor);
