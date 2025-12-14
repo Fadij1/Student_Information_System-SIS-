@@ -27,10 +27,10 @@ public class Course {
     // Getters are required for the TableView
     public int getCourseId() { return courseId; }
     public String getCourseCode() { return courseCode; }
-    public String getCourseName() { return courseName; }
-    public int getCredits() { return credits; }
-    public String getDayOfWeek() { return dayOfWeek; }
-    public String getStartTime() { return startTime; }
-    public String getEndTime() { return endTime; }
-    public String getRoomNumber() { return roomNumber; }
+    public String getCourseName() { return courseName;}
+    public int getCredits() { return credits;}
+    public String getDayOfWeek() { return dayOfWeek;  }
+    public String getStartTime() { return startTime;  }
+    public String getEndTime() { return endTime;  }
+    public String getRoomNumber() { return roomNumber;  }
 }

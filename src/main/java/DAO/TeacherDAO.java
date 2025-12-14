@@ -47,6 +47,7 @@ public class TeacherDAO {
                 "JOIN Courses c ON ta.CourseID = c.CourseID " +
                 "WHERE ta.TeacherID = ?";
 
+
         try (Connection conn = DatabaseManager.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
@@ -66,6 +67,7 @@ public class TeacherDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
     }
 
     // 3. update profile picture
@@ -118,6 +120,7 @@ public class TeacherDAO {
     // 2. Get Courses Taught by this Teacher
     public List<Course> getTeacherCourses(int teacherId) {
         List<Course> list = new ArrayList<>();
+
 
         // UPDATED SQL: Joins Halls table
         String sql = "SELECT C.CourseID, C.CourseCode, C.CourseName, C.Credits, " +

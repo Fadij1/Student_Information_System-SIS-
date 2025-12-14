@@ -84,8 +84,4 @@ public class Register {
         String regexPass = "(?=.*[A-Z])" + "(?=.*[a-z])" + "(?=.*[0-9])" + "(?=.*[" + SPECIAL_CHARS + "])" + "[A-Za-z0-9" + SPECIAL_CHARS + "]{" + MIN_LENGTH + ",}";
         return password.matches(regexPass);
     }
-
-
 }
-
-

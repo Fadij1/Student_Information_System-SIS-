@@ -20,6 +20,7 @@ public class Teacher {
         this.profilePicPath = profilePicPath;
     }
 
+
     public int getTeacherId() { return teacherId; }
     public String getFirstName() { return firstName; }
     public String getLastName() { return lastName; }

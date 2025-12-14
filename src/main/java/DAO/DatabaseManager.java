@@ -19,6 +19,7 @@ public class DatabaseManager {
 
     private DatabaseManager() {
         // Private constructor to prevent instantiation
+
     }
 
     public static Connection getConnection() throws SQLException {
