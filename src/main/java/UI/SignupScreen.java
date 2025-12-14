@@ -99,6 +99,7 @@ public class SignupScreen {
             new LoginScreen().show(stage);
         });
 
+
         // Add to Layout
         layout.getChildren().addAll(
                 title, subtitle,
