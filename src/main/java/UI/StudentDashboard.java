@@ -20,6 +20,7 @@ import javafx.stage.Stage;
 import java.io.InputStream;
 import java.util.List;
 
+
 public class StudentDashboard {
 
     public void show(Stage stage, Student student) {
