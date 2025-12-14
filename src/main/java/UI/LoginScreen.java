@@ -1,7 +1,11 @@
 package UI;
 
+import DAO.AdminDAO;
 import DAO.StudentDAO;
+import DAO.TeacherDAO;
+import Model.Admin;
 import Model.Student;
+import Model.Teacher;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -154,25 +158,25 @@ public class LoginScreen {
                 return;
             }
 
-            // 2. If not Student, Try Teacher
-//            TeacherDAO teacherDAO = new TeacherDAO();
-//            Teacher teacher = teacherDAO.login(email, pass);
-//            if (teacher != null) {
-//                messageLabel.setText("Login Success! Welcome Prof. " + teacher.getLastName());
-//                messageLabel.setTextFill(Color.GREEN);
-//                new TeacherDashboard().show(stage, teacher);
-//                return;
-//            }
-//
-//            // 3. If not Teacher, Try Admin (Admin uses Username usually, checking Email just in case)
-//            AdminDAO adminDAO = new AdminDAO();
-//            Admin admin = adminDAO.login(email, pass);
-//            if (admin != null) {
-//                messageLabel.setText("Login Success! Welcome Admin " + admin.getUsername());
-//                messageLabel.setTextFill(Color.GREEN);
-//                new AdminDashboard().show(stage, admin);
-//                return;
-//            }
+             //2. If not Student, Try Teacher
+            TeacherDAO teacherDAO = new TeacherDAO();
+            Teacher teacher = teacherDAO.login(email, pass);
+            if (teacher != null) {
+                messageLabel.setText("Login Success! Welcome Prof. " + teacher.getLastName());
+                messageLabel.setTextFill(Color.GREEN);
+                new TeacherDashboard().show(stage, teacher);
+                return;
+            }
+
+            // 3. If not Teacher, Try Admin (Admin uses Username usually, checking Email just in case)
+            AdminDAO adminDAO = new AdminDAO();
+            Admin admin = adminDAO.login(email, pass);
+            if (admin != null) {
+                messageLabel.setText("Login Success! Welcome Admin " + admin.getUsername());
+                messageLabel.setTextFill(Color.GREEN);
+                new AdminDashboard().show(stage, admin);
+                return;
+            }
 
             // 4. If all fail
             messageLabel.setText("Invalid Email or Password.");
