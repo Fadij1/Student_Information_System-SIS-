@@ -9,6 +9,7 @@ public class Teacher {
     private String department;
     private String profilePicPath;
 
+
     public Teacher(int teacherId, String firstName, String lastName, String email,String password, String department, String profilePicPath) {
         this.teacherId = teacherId;
         this.firstName = firstName;
