@@ -244,25 +244,25 @@ public class StudentDashboard {
         actionGrid.setHgap(20);
         actionGrid.setVgap(20);
 
-        // --- Card A: "My Courses" (Enrolled) ---
+        // My Courses
         Pane myCoursesCard = createActionCard("My Courses", "/images/courses_icon.png");
         myCoursesCard.setOnMouseClicked(e -> {
             root.setCenter(createMyCoursesView(student, root));
         });
 
-        // --- Card B: "Available Courses" (Register)
+        // Available Courses
         Pane availableCoursesCard = createActionCard("Register Courses", "/images/register_icon.png");
         availableCoursesCard.setOnMouseClicked(e -> {
             root.setCenter(createRegistrationView(student, root));
         });
 
-        // --- Card C: "My Schedule" ---
+        // My Schedule
         Pane scheduleCard = createActionCard("My Schedule", "/images/schedule_icon.png");
         scheduleCard.setOnMouseClicked(e -> {
             root.setCenter(createScheduleView(student, root));
         });
 
-        // --- Card D: "Fees" ---
+        // Fees
         Pane feesCard = createActionCard("Fees & Payments", "/images/fees_icon.png");
         feesCard.setOnMouseClicked(e -> {
             root.setCenter(createFeesView(student, root));
@@ -271,7 +271,7 @@ public class StudentDashboard {
         // Add all 4 cards
         actionGrid.getChildren().addAll(myCoursesCard, availableCoursesCard, scheduleCard, feesCard);
 
-        // 4. Add all to VBox
+        // Add all to VBox
         content.getChildren().addAll(title, subtitle, statsRow, actionGrid);
         return content;
     }
@@ -589,15 +589,13 @@ public class StudentDashboard {
         }
     }
 
-    // =========================================
-    // NEW: Registration View (Table with Buttons)
-    // =========================================
+
     private VBox createRegistrationView(Student student, BorderPane root) {
         VBox content = new VBox(20);
         content.setPadding(new Insets(30));
         content.setAlignment(Pos.TOP_LEFT);
 
-        // 1. Header & Back Button
+        // Header & Back Button
         Button backBtn = new Button("← Back");
         backBtn.setStyle(
                 "-fx-background-color: #d3d3d3;" +
@@ -615,7 +613,7 @@ public class StudentDashboard {
         Label subTitle = new Label("Select a course to register for the upcoming semester.");
         subTitle.setTextFill(Color.GREY);
 
-        // 2. The Table
+        // The Table
         TableView<Course> table = new TableView<>();
         table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
@@ -629,7 +627,7 @@ public class StudentDashboard {
         TableColumn<Course, Integer> credCol = new TableColumn<>("Credits");
         credCol.setCellValueFactory(new javafx.scene.control.cell.PropertyValueFactory<>("credits"));
 
-        // 3. THE ACTION COLUMN (Button Logic)
+        // THE ACTION COLUMN (Button Logic)
         TableColumn<Course, Void> actionCol = new TableColumn<>("Action");
 
         // Custom Cell Factory to render a Button inside the cell
@@ -657,7 +655,7 @@ public class StudentDashboard {
 
         table.getColumns().addAll(codeCol, nameCol, credCol, actionCol);
 
-        // 4. Load Data
+        // Load Data
         StudentDAO dao = new StudentDAO();
         List<Course> courses = dao.getAvailableCourses(student.getStudentId());
         table.getItems().addAll(courses);
@@ -674,6 +672,7 @@ public class StudentDashboard {
     // Helper to handle the click logic
     private void handleRegistration(Student student, Course course, BorderPane root) {
         StudentDAO dao = new StudentDAO();
+
         // Hardcoding Semester/Year for now, or you could add inputs for them
         boolean success = dao.registerCourse(student.getStudentId(), course.getCourseId(), "Spring", 2026);
 
