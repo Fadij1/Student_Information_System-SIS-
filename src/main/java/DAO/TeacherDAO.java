@@ -110,6 +110,10 @@ public class TeacherDAO {
             return false;
         }
     }
+ 
+ 
+ 
+ 
     // 2. Get Courses Taught by this Teacher
     public List<Course> getTeacherCourses(int teacherId) {
         List<Course> list = new ArrayList<>();
