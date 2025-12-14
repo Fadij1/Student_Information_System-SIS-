@@ -20,7 +20,6 @@ public class Teacher {
         this.profilePicPath = profilePicPath;
     }
 
-
     public int getTeacherId() { return teacherId; }
     public String getFirstName() { return firstName; }
     public String getLastName() { return lastName; }
@@ -28,7 +27,8 @@ public class Teacher {
     public String getDepartment() { return department; }
     public String getEmail() { return email; }
     public String getPassword() { return password; }
-    // ... add other getters if needed
+    // .... add other getters if needed
+
 
     @Override
     public String toString() { return "Prof. " + lastName + " (" + department + ")"; }
