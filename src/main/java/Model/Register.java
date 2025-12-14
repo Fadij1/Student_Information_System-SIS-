@@ -78,6 +78,7 @@ public class Register {
         return email.matches(regexEm);
     }
 
+
     public static boolean isValidPassword(String password) {
         int MIN_LENGTH = 8;
         String SPECIAL_CHARS = "@!#$%^&*()+\\-_";
