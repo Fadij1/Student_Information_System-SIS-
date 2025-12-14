@@ -23,6 +23,7 @@ public class EnrolledCourse {
         this.room = room;
     }
 
+
     // Getters are REQUIRED for TableView to work
     public String getCourseCode() { return courseCode; }
     public String getCourseName() { return courseName; }

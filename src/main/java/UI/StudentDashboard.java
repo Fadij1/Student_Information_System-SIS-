@@ -20,6 +20,7 @@ import javafx.stage.Stage;
 import java.io.InputStream;
 import java.util.List;
 
+
 public class StudentDashboard {
 
     public void show(Stage stage, Student student) {
@@ -165,6 +166,7 @@ public class StudentDashboard {
         sidebar.getChildren().addAll(profilePic, nameLabel, new Region(), navMenu);
         return sidebar;
     }
+
 
     // =========================================
     // 2. Helper: Create Styling for Buttons
