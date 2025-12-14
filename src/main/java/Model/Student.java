@@ -29,6 +29,7 @@ public class Student {
         this.creditsToBePaid = creditsToBePaid;
     }
 
+
     // Getters
     public int getStudentId() { return studentId; }
     public String getFirstName() { return firstName; }
@@ -42,7 +43,6 @@ public class Student {
     public double getWallet() {  return Wallet;  }
     public double getAmountToBePaid() {  return AmountToBePaid;  }
     public int getCreditsToBePaid() {  return creditsToBePaid;  }
-
 
     @Override
     public String toString() {

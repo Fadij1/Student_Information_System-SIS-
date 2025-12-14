@@ -17,7 +17,6 @@ import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
-
 import java.io.InputStream;
 import java.util.List;
 
@@ -79,9 +78,9 @@ public class StudentDashboard {
         return topBar;
     }
 
+
     // =========================================
     // Helper: Sidebar with REAL Profile Pic
-    // =========================================
     // =========================================
     // 1. The Sidebar Method
     // =========================================
