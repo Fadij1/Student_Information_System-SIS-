@@ -212,17 +212,14 @@ public class StudentDAO {
     public boolean updateStudentProfile(int studentId, String fName, String lName, String email, String password, String imagePath) {
         // Update SQL to include Email and Password
         String sql = "UPDATE Students SET FirstName = ?, LastName = ?, Email = ?, Password = CONVERT(NVARCHAR(64), HASHBYTES('SHA2_256', ?), 2), ProfilePicPath = ? WHERE StudentID = ?";
-
         try (Connection conn = DatabaseManager.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
-
             pstmt.setString(1, fName);
             pstmt.setString(2, lName);
             pstmt.setString(3, email);
             pstmt.setString(4, password);
             pstmt.setString(5, imagePath);
             pstmt.setInt(6, studentId);
-
             int rows = pstmt.executeUpdate();
             return rows > 0;
         } catch (SQLException e) {
