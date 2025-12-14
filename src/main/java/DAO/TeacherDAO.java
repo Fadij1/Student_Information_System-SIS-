@@ -156,7 +156,6 @@ public class TeacherDAO {
         return list;
     }
 
-
     // ==========================================
     // NEW: Report Hall Issue
     // ==========================================
@@ -177,6 +176,7 @@ public class TeacherDAO {
             return false;
         }
     }
+
 
     // 3. Get Students Enrolled in a specific Course
     public List<StudentGrade> getStudentsInCourse(int courseId) {

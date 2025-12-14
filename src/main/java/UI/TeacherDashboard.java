@@ -54,6 +54,7 @@ public class TeacherDashboard {
         return topBar;
     }
 
+
     // Sidebar (Updated with Profile Logic)
     private VBox createSidebar(Teacher teacher, BorderPane root) {
         VBox sidebar = new VBox(15);
