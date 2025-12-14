@@ -1,7 +1,9 @@
 package UI;
 
 import DAO.AdminDAO;
+import Model.Admin;
 import Model.Course;
+import Model.Hall;
 import Model.Teacher;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -216,7 +218,6 @@ public class AdminDashboard {
     private VBox createHallsView(BorderPane root) {
         VBox content = new VBox(15);
         content.setPadding(new Insets(20));
-
         Label title = new Label("Manage Halls");
         title.setFont(Font.font("Segoe UI", FontWeight.BOLD, 24));
 
@@ -228,10 +229,8 @@ public class AdminDashboard {
         typeBox.getItems().addAll("Classroom", "Lab", "Lecture Hall");
         typeBox.setPromptText("Type");
         typeBox.getSelectionModel().selectFirst();
-
         Button addBtn = new Button("Add Hall");
         addBtn.setStyle("-fx-background-color: #27ae60; -fx-text-fill: white;");
-
         form.getChildren().addAll(hallName, capacity, typeBox, addBtn);
 
         // 2. Halls Table

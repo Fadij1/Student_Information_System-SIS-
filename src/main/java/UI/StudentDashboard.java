@@ -438,7 +438,6 @@ public class StudentDashboard {
         Button saveBtn = new Button("Save Changes");
         saveBtn.setStyle("-fx-background-color: #27ae60; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand;");
         saveBtn.setPrefWidth(150);
-
         Label statusLabel = new Label();
 
         saveBtn.setOnAction(e -> {
