@@ -2,9 +2,9 @@ package Model;
 
 public class Course {
     private int courseId;
-    private String courseCode;
-    private String courseName;
-    private int credits;
+    private String courseCode ;
+    private String courseName ;
+    private int credits ;
     private String dayOfWeek;
     private String startTime;
     private String endTime;

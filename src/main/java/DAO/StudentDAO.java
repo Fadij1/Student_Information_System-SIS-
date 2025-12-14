@@ -266,7 +266,7 @@ public class StudentDAO {
 
     public List<Course> getAvailableCourses(int studentId) {
         List<Course> list = new ArrayList<>();
-        String sql = "SELECT * FROM Courses WHERE CourseID NOT IN (SELECT CourseID FROM Enrollments WHERE StudentID = ?)";
+        String sql =  "SELECT * FROM Courses WHERE CourseID NOT IN (SELECT CourseID FROM Enrollments WHERE StudentID = ?)";
 
         try (Connection conn = DatabaseManager.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -283,11 +283,15 @@ public class StudentDAO {
                     ));
                 }
             }
-        } catch (SQLException e) { e.printStackTrace(); }
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
         return list;
     }
 
     public boolean registerCourse(int studentId, int courseId, String semester, int year) {
+
         // Insert with NULL grade (since they just started)
         String sql = "INSERT INTO Enrollments (StudentID, CourseID, Semester, Year, Grade) VALUES (?, ?, ?, ?, NULL)";
 
@@ -301,7 +305,8 @@ public class StudentDAO {
 
             int rows = pstmt.executeUpdate();
             return rows > 0;
-        } catch (SQLException e) {
+        }
+        catch (SQLException e) {
             e.printStackTrace();
             return false;
         }
