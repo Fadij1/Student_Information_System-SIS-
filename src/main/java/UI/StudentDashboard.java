@@ -695,15 +695,13 @@ public class StudentDashboard {
         }
     }
 
-    // =========================================
-    // NEW: Weekly Schedule View
-    // =========================================
+
     private VBox createScheduleView(Student student, BorderPane root) {
         VBox content = new VBox(20);
         content.setPadding(new Insets(30));
         content.setAlignment(Pos.TOP_LEFT);
 
-        // 1. Header
+        // Header
         Button backBtn = new Button("← Back");
         backBtn.setStyle(
                 "-fx-background-color: #d3d3d3;" +
@@ -718,7 +716,7 @@ public class StudentDashboard {
         title.setFont(Font.font("Segoe UI", FontWeight.LIGHT, 28));
         title.setTextFill(Color.web("#2c3e50"));
 
-        // 2. The Weekly Grid (5 Columns)
+        // The Weekly Grid (5 Columns)
         HBox weekGrid = new HBox(15); // Spacing between days
         weekGrid.setAlignment(Pos.TOP_CENTER);
 
@@ -729,7 +727,7 @@ public class StudentDashboard {
         VBox thuCol = createDayColumn("Thursday");
         VBox friCol = createDayColumn("Friday");
 
-        // 3. Fetch Data & Distribute Cards
+        // Fetch Data & Distribute Cards
         StudentDAO dao = new StudentDAO();
         List<EnrolledCourse> courses = dao.getEnrolledCourses(student.getStudentId());
 
@@ -761,7 +759,7 @@ public class StudentDashboard {
         return content;
     }
 
-    // Helper: Create a Column for a specific Day
+    // Create a Column for a specific Day
     private VBox createDayColumn(String dayName) {
         VBox col = new VBox(10);
         col.setPadding(new Insets(10));
@@ -770,7 +768,7 @@ public class StudentDashboard {
 
         Label header = new Label(dayName);
         header.setFont(Font.font("Segoe UI", FontWeight.BOLD, 14));
-        header.setTextFill(Color.web("#7f8c8d"));
+        header.setTextFill(Color.web("#7f8c8d"));createClassCard
         header.setAlignment(Pos.CENTER);
         header.setMaxWidth(Double.MAX_VALUE);
 
@@ -778,7 +776,7 @@ public class StudentDashboard {
         return col;
     }
 
-    // Helper: Create a specific Card for a Class
+    // Create a specific Card for a Class
     private Pane createClassCard(EnrolledCourse c) {
         VBox card = new VBox(5);
         card.setPadding(new Insets(15));
@@ -797,7 +795,7 @@ public class StudentDashboard {
         time.setFont(Font.font("Segoe UI", 11));
         time.setTextFill(Color.web("#7f8c8d"));
 
-        Label room = new Label("📍 " + c.getRoom());
+        Label room = new Label(" 📍 " + c.getRoom());
         room.setFont(Font.font("Segoe UI", 11));
         room.setTextFill(Color.web("#7f8c8d"));
 

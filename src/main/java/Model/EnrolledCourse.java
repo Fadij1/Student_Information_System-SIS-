@@ -6,10 +6,10 @@ public class EnrolledCourse {
     private int credits;
     private String semester;
     private double grade; // 0.0 if not graded yet
-    private String day;
-    private String startTime;
-    private String endTime;
-    private String room;
+    private String day ;
+    private String startTime ;
+    private String endTime ;
+    private String room ;
 
     public EnrolledCourse(String code, String name, int cred, String sem, double gr, String day, String start, String end, String room) {
         this.courseCode = code;

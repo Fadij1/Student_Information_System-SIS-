@@ -259,7 +259,8 @@ public class StudentDAO {
                     ));
                 }
             }
-        } catch (SQLException e) { e.printStackTrace(); }
+        }
+        catch (SQLException e) { e.printStackTrace(); }
         return list;
     }
 
