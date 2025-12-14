@@ -381,31 +381,25 @@ public class StudentDashboard {
         VBox content = new VBox(15);
         content.setPadding(new Insets(40));
         content.setAlignment(Pos.TOP_LEFT);
-
         // Header
         Label title = new Label("Edit Profile");
         title.setFont(Font.font("Segoe UI", FontWeight.LIGHT, 28));
         title.setTextFill(Color.web("#2c3e50"));
-
         // --- 1. Profile Picture Section ---
         HBox picSection = new HBox(20);
         picSection.setAlignment(Pos.CENTER_LEFT);
-
         ImageView currentPic = new ImageView();
         currentPic.setFitWidth(100); currentPic.setFitHeight(100);
         Circle clip = new Circle(50, 50, 50);
         currentPic.setClip(clip);
-
         try {
             if (student.getProfilePicPath() != null)
                 currentPic.setImage(new Image("file:///" + student.getProfilePicPath().replace("\\", "/")));
             else
-                currentPic.setImage(new Image(getClass().getResourceAsStream("/images/student_placeholder.png")));
+            {currentPic.setImage(new Image(getClass().getResourceAsStream("/images/student_placeholder.png")));}
         } catch (Exception e) { /* Ignore */ }
-
         Button uploadBtn = new Button("Change Picture");
         final StringBuilder newImagePath = new StringBuilder(student.getProfilePicPath() == null ? "" : student.getProfilePicPath());
-
         uploadBtn.setOnAction(e -> {
             javafx.stage.FileChooser fc = new javafx.stage.FileChooser();
             fc.getExtensionFilters().add(new javafx.stage.FileChooser.ExtensionFilter("Images", "*.jpg", "*.png"));
@@ -419,7 +413,6 @@ public class StudentDashboard {
         picSection.getChildren().addAll(currentPic, uploadBtn);
 
         // --- 2. Form Fields ---
-
         // First Name
         Label lblF = new Label("First Name:");
         TextField fNameField = new TextField(student.getFirstName());
@@ -438,7 +431,7 @@ public class StudentDashboard {
         // Password (NEW)
         Label lblP = new Label("Password:");
         PasswordField passField = new PasswordField();
-        passField.setText(student.getPassword()); // Pre-fill current password
+        passField.setText(""); // Pre-fill current password
         passField.setMaxWidth(400);
 
         // --- 3. Save Button ---
