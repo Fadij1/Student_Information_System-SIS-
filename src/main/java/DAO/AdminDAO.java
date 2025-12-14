@@ -1,7 +1,10 @@
 package DAO;
 
-import Model.*;
-
+import Model.Admin;
+import Model.Course;
+import Model.Hall;
+import Model.Teacher;
+import Model.HallIssue;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -29,6 +32,7 @@ public class AdminDAO {
         } catch (SQLException e) { e.printStackTrace(); }
         return null;
     }
+
     // =========================
     // TEACHER MANAGEMENT
     // =========================
@@ -118,7 +122,6 @@ public class AdminDAO {
             return false;
         }
     }
-
 
     // Delete Hall
     public boolean deleteHall(int hallId) {

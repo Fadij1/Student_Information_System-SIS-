@@ -23,7 +23,6 @@ public class HallIssue {
         this.reportedDate = reportedDate;
     }
 
-
     // Getters
     public int getIssueId() { return issueId; }
     public int getHallId() { return hallId; }

@@ -5,10 +5,9 @@ public class Teacher {
     private String firstName;
     private String lastName;
     private String email;
-    private String password ;
-    private String department ;
-    private String profilePicPath ;
-
+    private String password;
+    private String department;
+    private String profilePicPath;
 
     public Teacher(int teacherId, String firstName, String lastName, String email,String password, String department, String profilePicPath) {
         this.teacherId = teacherId;
@@ -27,8 +26,6 @@ public class Teacher {
     public String getDepartment() { return department; }
     public String getEmail() { return email; }
     public String getPassword() { return password; }
-    // .... add other getters if needed
-
 
     @Override
     public String toString() { return "Prof. " + lastName + " (" + department + ")"; }

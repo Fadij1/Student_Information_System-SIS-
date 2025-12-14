@@ -1,7 +1,5 @@
 package DAO;
-
 import Model.*;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -13,7 +11,7 @@ public class TeacherDAO {
 
     // 1. LOGIN
     public Teacher login(String email, String password) {
-        String sql =  "SELECT TeacherID, FirstName, LastName, Email, Department, Password, ProfilePicPath  FROM Teachers WHERE Email = ? AND Password = CONVERT(NVARCHAR(64), HASHBYTES('SHA2_256', ?), 2)";
+        String sql = "SELECT TeacherID, FirstName, LastName, Email, Department, Password, ProfilePicPath  FROM Teachers WHERE Email = ? AND Password = CONVERT(NVARCHAR(64), HASHBYTES('SHA2_256', ?), 2)";
 
         try (Connection conn = DatabaseManager.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -47,7 +45,6 @@ public class TeacherDAO {
                 "JOIN Courses c ON ta.CourseID = c.CourseID " +
                 "WHERE ta.TeacherID = ?";
 
-
         try (Connection conn = DatabaseManager.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
@@ -67,12 +64,11 @@ public class TeacherDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
     }
 
-    // update profile picture
+    // 3. update profile picture
     public boolean updateProfilePic(int studentId, String imagePath) {
-        String sql =  "UPDATE Students SET ProfilePicPath = ? WHERE StudentID = ?";
+        String sql = "UPDATE Students SET ProfilePicPath = ? WHERE StudentID = ?";
 
         try (Connection conn = DatabaseManager.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -91,11 +87,10 @@ public class TeacherDAO {
         return false;
     }
 
-
-    // update profile info
+    //3. update profile info
     public boolean updateProfile(int teacherId, String fName, String lName, String email, String password, String dept, String picPath) {
-        String sql =   "UPDATE Teachers SET FirstName=?, LastName=?, Email=?, "  +
-                 "Password=CONVERT(NVARCHAR(64), HASHBYTES('SHA2_256', ?), 2), Department=?, ProfilePicPath=? WHERE TeacherID=?";
+        String sql = "UPDATE Teachers SET FirstName=?, LastName=?, Email=?, " +
+                "Password=CONVERT(NVARCHAR(64), HASHBYTES('SHA2_256', ?), 2), Department=?, ProfilePicPath=? WHERE TeacherID=?";
         try (Connection conn = DatabaseManager.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
@@ -113,14 +108,9 @@ public class TeacherDAO {
             return false;
         }
     }
- 
- 
- 
- 
     // 2. Get Courses Taught by this Teacher
     public List<Course> getTeacherCourses(int teacherId) {
         List<Course> list = new ArrayList<>();
-
 
         // UPDATED SQL: Joins Halls table
         String sql = "SELECT C.CourseID, C.CourseCode, C.CourseName, C.Credits, " +
@@ -177,7 +167,6 @@ public class TeacherDAO {
         }
     }
 
-
     // 3. Get Students Enrolled in a specific Course
     public List<StudentGrade> getStudentsInCourse(int courseId) {
         List<StudentGrade> list = new ArrayList<>();
@@ -220,6 +209,7 @@ public class TeacherDAO {
     // Returns a Map or simple int array: [A_count, B_count, C_count, D_count, F_count]
     public int[] getGradeDistribution(int courseId) {
         int[] stats = new int[5]; // 0=A, 1=B, 2=C, 3=D, 4=F
+
         // Efficient SQL to categorize grades in one go
         String sql = "SELECT " +
                 "SUM(CASE WHEN Grade >= 90 THEN 1 ELSE 0 END) AS A, " +

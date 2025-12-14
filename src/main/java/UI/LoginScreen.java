@@ -1,9 +1,11 @@
 package UI;
 
 import DAO.AdminDAO;
+import DAO.ParentDAO;
 import DAO.StudentDAO;
 import DAO.TeacherDAO;
 import Model.Admin;
+import Model.Parent;
 import Model.Student;
 import Model.Teacher;
 import javafx.geometry.Insets;
@@ -13,6 +15,7 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -21,7 +24,6 @@ import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 
 import java.io.InputStream;
-
 
 public class LoginScreen {
 
@@ -158,7 +160,7 @@ public class LoginScreen {
                 return;
             }
 
-             //2. If not Student, Try Teacher
+            // 2. If not Student, Try Teacher
             TeacherDAO teacherDAO = new TeacherDAO();
             Teacher teacher = teacherDAO.login(email, pass);
             if (teacher != null) {
@@ -178,7 +180,17 @@ public class LoginScreen {
                 return;
             }
 
-            // 4. If all fail
+            // 4. Try Parent Login (NEW)
+            ParentDAO parentDAO = new ParentDAO();
+            Parent parent = parentDAO.login(email, pass);
+            if (parent != null) {
+                messageLabel.setText("Login Success! Welcome " + parent.getFirstName());
+                messageLabel.setTextFill(Color.GREEN);
+                new ParentDashboard().show(stage, parent);
+                return;
+            }
+
+            // 5. If all fail
             messageLabel.setText("Invalid Email or Password.");
             messageLabel.setTextFill(Color.RED);
         });

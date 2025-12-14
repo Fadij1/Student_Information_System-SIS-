@@ -10,9 +10,9 @@ public class Student {
     private double gpa;
     private int creditHours;
     private int weeks;
-    private double Wallet = 0.0;
-    private double AmountToBePaid ;
-    private int creditsToBePaid ;
+    private double Wallet=0.0;
+    private double AmountToBePaid;
+    private int creditsToBePaid;
 
     public Student(int studentId, String firstName, String lastName, String email, String profilePicPath, double gpa, int creditHours, int weeks, String password, double Wallet, double AmountToBePaid, int creditsToBePaid) {
         this.studentId = studentId;
@@ -40,9 +40,9 @@ public class Student {
     public int getWeeks() { return weeks; }
     public String getEmail() {return email;}
     public String getPassword() { return password; }
-    public double getWallet() {  return Wallet;  }
-    public double getAmountToBePaid() {  return AmountToBePaid;  }
-    public int getCreditsToBePaid() {  return creditsToBePaid;  }
+    public double getWallet() { return Wallet; }
+    public double getAmountToBePaid() { return AmountToBePaid; }
+    public int getCreditsToBePaid() { return creditsToBePaid; }
 
     @Override
     public String toString() {

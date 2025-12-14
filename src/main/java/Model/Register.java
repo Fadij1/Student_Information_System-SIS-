@@ -1,11 +1,11 @@
 package Model;
 
 public class Register {
-   private String firstName;
-   private String lastName;
-   private String username;
-   private String password;
-   private String email;
+    String firstName;
+    String lastName;
+    String username;
+    String password;
+    String email;
 
     public Register() {
     }
@@ -78,11 +78,12 @@ public class Register {
         return email.matches(regexEm);
     }
 
-
     public static boolean isValidPassword(String password) {
         int MIN_LENGTH = 8;
         String SPECIAL_CHARS = "@!#$%^&*()+\\-_";
         String regexPass = "(?=.*[A-Z])" + "(?=.*[a-z])" + "(?=.*[0-9])" + "(?=.*[" + SPECIAL_CHARS + "])" + "[A-Za-z0-9" + SPECIAL_CHARS + "]{" + MIN_LENGTH + ",}";
         return password.matches(regexPass);
     }
+
+
 }
