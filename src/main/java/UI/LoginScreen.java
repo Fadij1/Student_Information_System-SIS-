@@ -18,6 +18,7 @@ import javafx.stage.Stage;
 
 import java.io.InputStream;
 
+
 public class LoginScreen {
 
     public void show(Stage stage) {
