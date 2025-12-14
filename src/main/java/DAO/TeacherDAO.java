@@ -89,6 +89,7 @@ public class TeacherDAO {
         return false;
     }
 
+
     //3. update profile info
     public boolean updateProfile(int teacherId, String fName, String lName, String email, String password, String dept, String picPath) {
         String sql = "UPDATE Teachers SET FirstName=?, LastName=?, Email=?, " +
@@ -215,7 +216,6 @@ public class TeacherDAO {
     // Returns a Map or simple int array: [A_count, B_count, C_count, D_count, F_count]
     public int[] getGradeDistribution(int courseId) {
         int[] stats = new int[5]; // 0=A, 1=B, 2=C, 3=D, 4=F
-
         // Efficient SQL to categorize grades in one go
         String sql = "SELECT " +
                 "SUM(CASE WHEN Grade >= 90 THEN 1 ELSE 0 END) AS A, " +
