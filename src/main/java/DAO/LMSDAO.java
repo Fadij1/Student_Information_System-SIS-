@@ -12,7 +12,7 @@ import java.util.List;
 public class LMSDAO {
 
     public boolean uploadMaterial(int courseId, String fileName, String filePath) {
-        String sql = "INSERT INTO Materials (CourseID, FileName, FilePath, UploadDate) VALUES (?, ?, ?, GETDATE())";
+        String sql =  "INSERT INTO Materials (CourseID, FileName, FilePath, UploadDate) VALUES (?, ?, ?, GETDATE())";
         try (Connection conn = DatabaseManager.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setInt(1, courseId);
@@ -27,7 +27,7 @@ public class LMSDAO {
 
     public List<Material> getMaterialsByCourse(int courseId) {
         List<Material> list = new ArrayList<>();
-        String sql = "SELECT * FROM Materials WHERE CourseID = ? ORDER BY UploadDate DESC";
+        String sql =  "SELECT * FROM Materials WHERE CourseID = ? ORDER BY UploadDate DESC";
         try (Connection conn = DatabaseManager.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setInt(1, courseId);
