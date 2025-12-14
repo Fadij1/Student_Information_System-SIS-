@@ -307,6 +307,7 @@ public class StudentDAO {
 
     public double getTotalPaid(int studentId) {
         String sql = "SELECT SUM(Amount) AS TotalPaid FROM Payments WHERE StudentID = ?";
+
         try (Connection conn = DatabaseManager.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
@@ -322,6 +323,7 @@ public class StudentDAO {
 
     // 2. Make a Payment
     public boolean payTuition(int studentId, double amount) {
+
         // STEP 1: Check if Wallet has enough money first!
         double currentWalletBalance = getWalletBalance(studentId); // Helper method below
 
@@ -352,7 +354,7 @@ public class StudentDAO {
 
     // Helper to check balance before paying
     public double getWalletBalance(int studentId) {
-        String sql = "SELECT Wallet FROM Students WHERE StudentID = ?";
+        String sql =  "SELECT Wallet FROM Students WHERE StudentID = ?";
         try (Connection conn = DatabaseManager.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setInt(1, studentId);
@@ -364,6 +366,7 @@ public class StudentDAO {
 
     // Add money to the Wallet (e.g., via Bank Transfer / Credit Card)
     public boolean depositMoney(int studentId, double amount) {
+
         // Only Wallet increases. Debt stays the same until you choose to "Pay" it.
         String sql = "UPDATE Students SET Wallet = Wallet + ? WHERE StudentID = ?";
 

@@ -813,6 +813,7 @@ public class StudentDashboard {
         content.setPadding(new Insets(30));
         content.setAlignment(Pos.TOP_LEFT);
 
+
         // 1. Header
         Button backBtn = new Button("← Back");
         backBtn.setStyle(
@@ -831,17 +832,19 @@ public class StudentDashboard {
         StudentDAO dao = new StudentDAO();
         Student updatedStudent1=dao.login(student.getEmail(), student.getPassword());
 
+
         // 2. GET DATA SEPARATELY
         // Wallet = Money you HAVE.
         // AmountToBePaid = Money you OWE.
         double currentWallet = updatedStudent1.getWallet();
         double currentDebt = updatedStudent1.getAmountToBePaid();
 
+
         // 3. Financial Cards Row
         HBox financeRow = new HBox(20);
         financeRow.setAlignment(Pos.CENTER_LEFT);
 
-        // --- BOX 1: WALLET (Available Funds) ---
+        // BOX 1: WALLET (Available Funds)
         // Green if you have money, Grey if empty
         String walletColor = currentWallet > 0 ? "#2ecc71" : "#95a5a6";
         Pane walletCard = createStatCard("WALLET (AVAILABLE)", String.format("%,.0f EGP", currentWallet), "Pre-Paid", walletColor);
