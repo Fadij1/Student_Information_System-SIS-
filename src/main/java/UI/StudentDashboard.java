@@ -133,23 +133,28 @@ public class StudentDashboard {
         Button bookBtn = createNavButton("Book Hall", false); // NEW
         Button hallInfoBtn = createNavButton("Hall Info", false); // <--- NEW BUTTON
         Button lmsBtn = createNavButton("LMS ->", false);
-        Button profileBtn = createNavButton("Profile", false);
+        Button transBtn = createNavButton("Transcript", false);
+        Button profileBtn = createNavButton("My Profile", false);
         Button logoutBtn = createNavButton("Logout", false);
 
         // 2. Dashboard Action (Switch View)
         dashBtn.setOnAction(e -> {
             root.setCenter(createMainContent(student, root));
-            setActive(dashBtn, profileBtn, logoutBtn);
+            setActive(dashBtn,lmsBtn ,transBtn , bookBtn,hallInfoBtn,profileBtn, logoutBtn);
         });
         lmsBtn.setOnAction(e -> {
             root.setCenter(new LMSStudentView().createView(student));
-            setActive(lmsBtn, dashBtn, bookBtn, hallInfoBtn, profileBtn, logoutBtn);
+            setActive(lmsBtn ,dashBtn,transBtn , bookBtn,hallInfoBtn,profileBtn, logoutBtn);
         });
 
         // 3. Profile Action (Switch View)
         profileBtn.setOnAction(e -> {
             root.setCenter(createProfileView(student)); // Switch content
-            setActive(profileBtn, dashBtn, logoutBtn);  // Update visual style
+            setActive(profileBtn,dashBtn,lmsBtn ,transBtn , bookBtn,hallInfoBtn, logoutBtn);  // Update visual style
+        });
+        transBtn.setOnAction(e -> {
+            root.setCenter(createTranscriptView(student));
+            setActive(transBtn ,dashBtn,lmsBtn , bookBtn,hallInfoBtn,profileBtn, logoutBtn);
         });
 
         // 4. Logout Action
@@ -166,14 +171,14 @@ public class StudentDashboard {
         });
         bookBtn.setOnAction(e -> {
             root.setCenter(createBookingView(student, root));
-            setActive(bookBtn, dashBtn, profileBtn, logoutBtn);
+            setActive(bookBtn,logoutBtn,dashBtn,lmsBtn ,transBtn , hallInfoBtn,profileBtn);
         });
         hallInfoBtn.setOnAction(e -> {
             root.setCenter(createHallInfoView(student)); // Call the new view method
-            setActive(hallInfoBtn, dashBtn, bookBtn, profileBtn, logoutBtn);
+            setActive(hallInfoBtn,dashBtn,lmsBtn ,transBtn , bookBtn,profileBtn, logoutBtn);
         });
 
-        navMenu.getChildren().addAll(dashBtn, profileBtn,lmsBtn, bookBtn,hallInfoBtn, logoutBtn );
+        navMenu.getChildren().addAll(dashBtn,lmsBtn ,transBtn , bookBtn,hallInfoBtn,profileBtn, logoutBtn );
 
         // Add everything to Sidebar
         sidebar.getChildren().addAll(profilePic, nameLabel, new Region(), navMenu);
@@ -448,11 +453,20 @@ public class StudentDashboard {
         TextField emailField = new TextField(student.getEmail());
         emailField.setMaxWidth(400);
 
-        // Password (NEW)
-        Label lblP = new Label("Password:");
-        PasswordField passField = new PasswordField();
-        passField.setText(student.getPassword()); // Pre-fill current password
-        passField.setMaxWidth(400);
+        Label lblOldP = new Label("Old Password:");
+        PasswordField oldPassField = new PasswordField(); oldPassField.setMaxWidth(400);
+        oldPassField.setPromptText("Enter Old Password");
+
+        Label lblNewP = new Label("New Password:");
+        PasswordField newPassField = new PasswordField(); newPassField.setMaxWidth(400);
+        newPassField.setPromptText("Enter New Password");
+
+
+//        // Password (NEW)
+//        Label lblP = new Label("New Password:");
+//        PasswordField passField = new PasswordField();
+//        //passField.setText(student.getPassword()); // Pre-fill current password
+//        passField.setMaxWidth(400);
 
         // --- 3. Save Button ---
         Button saveBtn = new Button("Save Changes");
@@ -463,23 +477,47 @@ public class StudentDashboard {
 
         saveBtn.setOnAction(e -> {
             StudentDAO dao = new StudentDAO();
+            String newPass = newPassField.getText();
+            String oldPass = oldPassField.getText();
 
-            // Pass all 5 fields to the DAO
-            boolean success = dao.updateStudentProfile(
-                    student.getStudentId(),
-                    fNameField.getText(),
-                    lNameField.getText(),
-                    emailField.getText(), // New
-                    passField.getText(),  // New
-                    newImagePath.toString()
-            );
+            // CHECK: if new pass is not empty
+            if (!newPass.isEmpty()) {
+                if (oldPass.isEmpty()) {
+                    new Alert(Alert.AlertType.ERROR, "Enter Old Password to confirm.").show(); return;
+                }
+                if (!dao.verifyPassword(student.getStudentId(), oldPass)) {
+                    new Alert(Alert.AlertType.ERROR, "Incorrect Old Password.").show(); return;
+                }
+                if (!Model.Register.isValidPassword(newPass)) {
+                    new Alert(Alert.AlertType.ERROR, "Weak Password. but we will continue for ease of use").show(); //return;
+                }
+            }
 
-            if (success) {
-                statusLabel.setText("Saved! Please Logout to see changes.");
-                statusLabel.setTextFill(Color.GREEN);
+            if(newPass.isEmpty() && !oldPass.isEmpty()){
+                new Alert(Alert.AlertType.ERROR, "Enter New Password.").show(); return;
+            }
+
+            boolean success = dao.updateStudentProfile(student.getStudentId(), fNameField.getText(), lNameField.getText(), emailField.getText(), newPass, newImagePath.toString());
+            // Update
+            if(success) {
+                // 1. Alert User & Wait
+                Alert alert = new Alert(Alert.AlertType.INFORMATION, "Profile Saved!");
+                alert.show();
+
+                // 2. Fetch Fresh Data from Database
+                Student updatedStudent = dao.getStudentById(student.getStudentId());
+
+                // 3. Reload Dashboard
+                if (updatedStudent != null) {
+                    Stage currentStage = (Stage) saveBtn.getScene().getWindow();
+                    new StudentDashboard().show(currentStage, updatedStudent);
+                }
+
+                // Clear fields (not strictly necessary since we refresh, but good practice)
+                oldPassField.clear();
+                newPassField.clear();
             } else {
-                statusLabel.setText("Error: Email might already represent another user.");
-                statusLabel.setTextFill(Color.RED);
+                new Alert(Alert.AlertType.ERROR, "Error updating profile.").show();
             }
         });
 
@@ -490,7 +528,8 @@ public class StudentDashboard {
                 lblF, fNameField,
                 lblL, lNameField,
                 lblE, emailField,
-                lblP, passField,
+                lblOldP, oldPassField,
+                lblNewP, newPassField,
                 new Region(), // Spacer
                 saveBtn,
                 statusLabel
@@ -1135,6 +1174,83 @@ public class StudentDashboard {
         // Add Tabs
         tabs.getTabs().addAll(scheduleTab, myBookingsTab); // Schedule first as requested
         content.getChildren().addAll(title, tabs);
+        return content;
+    }
+
+    private VBox createTranscriptView(Student student) {
+        VBox content = new VBox(20);
+        content.setPadding(new Insets(40));
+        content.setAlignment(Pos.TOP_LEFT);
+
+        Label title = new Label("Academic Transcript");
+        title.setFont(Font.font("Segoe UI", FontWeight.LIGHT, 28));
+        title.setTextFill(Color.web("#2c3e50"));
+
+        // 1. Generate the Transcript Text
+        TextArea transcriptArea = new TextArea();
+        transcriptArea.setEditable(false); // Read-only
+        transcriptArea.setPrefHeight(500);
+        transcriptArea.setFont(Font.font("Monospaced", 14)); // Monospace for alignment
+
+        // Fetch Data
+        StudentDAO dao = new StudentDAO();
+        List<EnrolledCourse> completedCourses = dao.getCompletedCourses(student.getStudentId());
+
+        // Build the String
+        StringBuilder sb = new StringBuilder();
+        sb.append("OFFICIAL ACADEMIC TRANSCRIPT\n");
+        sb.append("=================================================================\n");
+        sb.append(String.format("Student Name : %s %s\n", student.getFirstName(), student.getLastName()));
+        sb.append(String.format("Student ID   : %d\n", student.getStudentId()));
+        sb.append(String.format("Email        : %s\n", student.getEmail()));
+        sb.append(String.format("Date Issued  : %s\n", java.time.LocalDate.now()));
+        sb.append("=================================================================\n\n");
+
+        sb.append(String.format("%-10s %-35s %-15s %-10s %-5s\n", "CODE", "COURSE TITLE", "SEMESTER", "CREDITS", "GRADE"));
+        sb.append("-----------------------------------------------------------------\n");
+
+        int totalCredits = 0;
+        for (EnrolledCourse c : completedCourses) {
+            sb.append(String.format("%-10s %-35s %-15s %-10d %-5.2f\n",
+                    c.getCourseCode(),
+                    c.getCourseName(),
+                    c.getSemester(),
+                    c.getCredits(),
+                    c.getGrade()));
+
+            totalCredits += c.getCredits();
+        }
+
+        sb.append("-----------------------------------------------------------------\n\n");
+        sb.append("SUMMARY:\n");
+        sb.append(String.format("Total Completed Credits : %d\n", totalCredits));
+        sb.append(String.format("Cumulative GPA          : %.2f\n", student.getGpa()));
+        sb.append("\n*** END OF TRANSCRIPT ***\n");
+
+        transcriptArea.setText(sb.toString());
+
+        // 2. Download Button
+        Button downloadBtn = new Button("Download as File (.txt)");
+        downloadBtn.setStyle("-fx-background-color: #27ae60; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand;");
+
+        downloadBtn.setOnAction(e -> {
+            javafx.stage.FileChooser fileChooser = new javafx.stage.FileChooser();
+            fileChooser.setTitle("Save Transcript");
+            fileChooser.getExtensionFilters().add(new javafx.stage.FileChooser.ExtensionFilter("Text Files", "*.txt"));
+            fileChooser.setInitialFileName("Transcript_" + student.getFirstName() + "_" + student.getLastName() + ".txt");
+
+            java.io.File file = fileChooser.showSaveDialog(null);
+            if (file != null) {
+                try {
+                    java.nio.file.Files.writeString(file.toPath(), sb.toString());
+                    new Alert(Alert.AlertType.INFORMATION, "Transcript saved successfully!").show();
+                } catch (Exception ex) {
+                    new Alert(Alert.AlertType.ERROR, "Failed to save file.").show();
+                }
+            }
+        });
+
+        content.getChildren().addAll(title, transcriptArea, downloadBtn);
         return content;
     }
 

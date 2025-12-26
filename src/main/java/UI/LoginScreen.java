@@ -15,14 +15,12 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
-
 import java.io.InputStream;
 
 public class LoginScreen {
@@ -88,24 +86,12 @@ public class LoginScreen {
         loginBtn.setPrefSize(400, 45);
         loginBtn.setStyle("-fx-background-color: #6a5acd; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 16px; -fx-background-radius: 25; -fx-cursor: hand;");
 
-//        // --- F. "OR" Separator ---
-//        HBox orSeparator = new HBox(10);
-//        orSeparator.setAlignment(Pos.CENTER);
-//        Pane line1 = new Pane(); line1.setPrefHeight(1); line1.setStyle("-fx-background-color: #ccc;"); HBox.setHgrow(line1, Priority.ALWAYS);
-//        Label orLbl = new Label("or"); orLbl.setTextFill(Color.GRAY);
-//        Pane line2 = new Pane(); line2.setPrefHeight(1); line2.setStyle("-fx-background-color: #ccc;"); HBox.setHgrow(line2, Priority.ALWAYS);
-//        orSeparator.getChildren().addAll(line1, orLbl, line2);
-
         // --- G. Links ---
         Hyperlink forgotPassLink = new Hyperlink("Can Not Sign In? Press Here");
         forgotPassLink.setStyle("-fx-text-fill: #6a5acd; -fx-underline: true;");
 
-        Button signupBtn = new Button("Sign Up");
-        signupBtn.setPrefSize(400, 45);
-        signupBtn.setStyle("-fx-background-color: #28a745; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 16px; -fx-background-radius: 25; -fx-cursor: hand;");
-
         // Add everything to Left Pane
-        leftPane.getChildren().addAll(logoView, titleLabel, descLabel, messageLabel, emailContainer, passContainer, loginBtn, /*orSeparator,*/ forgotPassLink, signupBtn);
+        leftPane.getChildren().addAll(logoView, titleLabel, descLabel, messageLabel, emailContainer, passContainer, loginBtn, forgotPassLink);
 
         // ==========================================
         // 2. RIGHT PANE: The Background Image
@@ -128,7 +114,6 @@ public class LoginScreen {
         // 4. LOGIC (Actions)
         // ==========================================
 
-        // LOGIN LOGIC
         loginBtn.setOnAction(e -> {
             String email = emailField.getText().trim();
             String pass = passField.getText().trim();
@@ -193,11 +178,6 @@ public class LoginScreen {
             // 5. If all fail
             messageLabel.setText("Invalid Email or Password.");
             messageLabel.setTextFill(Color.RED);
-        });
-
-        // SIGNUP LOGIC
-        signupBtn.setOnAction(e -> {
-            new SignupScreen().show(stage);
         });
 
         Scene scene = new Scene(root, 1000, 650);
