@@ -8,68 +8,55 @@
 ## 📌 Project Overview
 The **Student Information System (SIS)** is a centralized, web-based desktop application designed to digitize and automate academic and administrative operations at **Ain Shams University**. 
 
-[cite_start]Developed using the **Scrum Framework** over 8 Sprints, this system streamlines four critical domains: Facilities Management, Curriculum Delivery, Staff Administration, and Community Engagement[cite: 2, 60, 160].
+Developed using the **Scrum Framework** over 8 Sprints, this system streamlines four critical domains: Facilities Management, Curriculum Delivery, Staff Administration, and Community Engagement.
 
 ## 🚀 Key Features
 
 ### 1. Facilities Module (Infrastructure)
-* [cite_start]**Conflict-Free Booking:** Algorithms to prevent double-booking of classrooms and labs[cite: 165].
-* [cite_start]**Maintenance Reporting:** Ticket-based system for students/staff to report issues (e.g., broken projectors) and for Admins to resolve them[cite: 773].
-* [cite_start]**EAV Model:** Implemented Entity-Attribute-Value architecture to dynamically add room attributes (e.g., "Has AC") without altering the database schema[cite: 111].
+* **Conflict-Free Booking:** Algorithms to prevent double-booking of classrooms and labs.
+* **Maintenance Reporting:** Ticket-based system for students/staff to report issues (e.g., broken projectors) and for Admins to resolve them.
+* **EAV Model:** Implemented Entity-Attribute-Value architecture to dynamically add room attributes (e.g., "Has AC") without altering the database schema.
 
 ### 2. Curriculum Module (Academic Core)
-* [cite_start]**Self-Service Enrollment:** Students can register for courses, drop classes, and view available electives[cite: 319].
-* [cite_start]**Automated GPA Calculation:** Database triggers instantly recalculate GPA upon grading, removing the need for complex application-side loops[cite: 117].
-* [cite_start]**Transcript Generation:** One-click academic history generation[cite: 74].
+* **Self-Service Enrollment:** Students can register for courses, drop classes, and view available electives.
+* **Automated GPA Calculation:** Database triggers instantly recalculate GPA upon grading, removing the need for complex application-side loops.
+* **Transcript Generation:** One-click academic history generation.
 
 ### 3. Staff Module (Administration)
-* [cite_start]**Grading System:** Secure interface for professors to input grades, which automatically updates student records[cite: 445].
-* [cite_start]**Analytics Dashboard:** Visualizations of grade distributions (Bar Charts) for course performance analysis[cite: 446].
-* [cite_start]**Payroll & Leave:** Management of financial benefits and leave requests[cite: 170].
+* **Grading System:** Secure interface for professors to input grades, which automatically updates student records.
+* **Analytics Dashboard:** Visualizations of grade distributions (Bar Charts) for course performance analysis.
+* **Payroll & Leave:** Management of financial benefits and leave requests.
 
 ### 4. Community Module
-* [cite_start]**Parent Portal:** Secure access for parents to view their child's grades and attendance[cite: 33].
-* [cite_start]**Secure Messaging:** Direct communication channel between parents and teachers[cite: 765].
-* [cite_start]**LMS Integration:** File upload/download capabilities for course materials[cite: 601].
+* **Parent Portal:** Secure access for parents to view their child's grades and attendance.
+* **Secure Messaging:** Direct communication channel between parents and teachers.
+* **LMS Integration:** File upload/download capabilities for course materials.
 
 ---
 
 ## 🛠️ Technical Architecture
 
-[cite_start]This project strictly adheres to the **DAO (Data Access Object) Design Pattern** to decouple the UI from the database logic, ensuring maintainability and scalability[cite: 84].
+This project strictly adheres to the **DAO (Data Access Object) Design Pattern** to decouple the UI from the database logic, ensuring maintainability and scalability.
 
 ### Tech Stack
-* [cite_start]**Frontend:** JavaFX (Modular UI with CSS styling)[cite: 64].
-* [cite_start]**Backend:** Java (JDK 17+)[cite: 65].
-* [cite_start]**Database:** Microsoft SQL Server (T-SQL)[cite: 66].
-* [cite_start]**Build Tool:** Maven[cite: 67].
-* [cite_start]**Version Control:** Git (Feature Branch Workflow)[cite: 139].
+* **Frontend:** JavaFX (Modular UI with CSS styling).
+* **Backend:** Java (JDK 17+).
+* **Database:** Microsoft SQL Server (T-SQL).
+* **Build Tool:** Maven.
+* **Version Control:** Git (Feature Branch Workflow).
 
 ### Database Logic (Automation)
 We utilized **SQL Triggers** to handle critical logic atomically:
-* [cite_start]`trg_AutoCalculateGPA`: Automatically updates student GPA when a grade is inserted/updated[cite: 471].
-* [cite_start]`trg_AutoUpdateFeesOnEnrollment`: Adds course fees to the student's ledger immediately upon registration[cite: 356].
+* `trg_AutoCalculateGPA`: Automatically updates student GPA when a grade is inserted/updated.
+* `trg_AutoUpdateFeesOnEnrollment`: Adds course fees to the student's ledger immediately upon registration.
 
 ### Security
-* [cite_start]**Password Hashing:** SHA-256 encryption for all user passwords[cite: 674].
-* [cite_start]**Input Validation:** Strict validation for emails and strong passwords[cite: 208].
-* [cite_start]**Role-Based Access Control:** Distinct views for Admin, Student, Teacher, and Parent roles[cite: 206].
+* **Password Hashing:** SHA-256 encryption for all user passwords.
+* **Input Validation:** Strict validation for emails and strong passwords.
+* **Role-Based Access Control:** Distinct views for Admin, Student, Teacher, and Parent roles.
 
 ---
 
-## 📸 Screenshots
-
-| Login Portal | Admin Dashboard |
-|:---:|:---:|
-| ![Login](images/login_screen.png) | ![Admin](images/admin_dashboard.png) |
-| *Secure Role-Based Login* | *User & Facility Management* |
-
-| Student Dashboard | Teacher Analytics |
-|:---:|:---:|
-| ![Student](images/student_dashboard.png) | ![Teacher](images/teacher_dashboard.png) |
-| *Course Registration & GPA* | *Grade Distribution & LMS* |
-
----
 
 ## ⚙️ Installation & Setup
 
@@ -90,7 +77,7 @@ We utilized **SQL Triggers** to handle critical logic atomically:
 
 ## 📅 Agile Methodology
 
-[cite_start]This project was executed using **Scrum** over **8 Sprints**[cite: 976]:
+This project was executed using **Scrum** over **8 Sprints**:
 
 1.  **Foundation & Security:** Login, Registration, DB Setup.
 2.  **Student Core:** Enrollment, Dropping Courses.
@@ -101,13 +88,13 @@ We utilized **SQL Triggers** to handle critical logic atomically:
 7.  **Resources:** Asset Allocation, Final LMS features.
 8.  **Stabilization:** UI Polish, Bug Fixes, Final Delivery.
 
-[cite_start]**Velocity:** Average of **18.25 Story Points** per sprint[cite: 981].
+**Velocity:** Average of **18.25 Story Points** per sprint.
 
 ---
 
 ## 👥 Team 25
 
-| Name | ID 
+|    Name |    ID 
 |:---|:---
 | **Michael Nagi** | 22P0101
 | **Fady John** | 22P0051
